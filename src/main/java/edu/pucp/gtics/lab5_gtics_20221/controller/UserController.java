@@ -57,7 +57,6 @@ public class UserController {
             session.setAttribute("carrito", new ArrayList<Juegos>());
             session.setAttribute("ncarrito", 0);
         }
-        System.out.println(role);
         return "redirect:/vista";
 
     }
