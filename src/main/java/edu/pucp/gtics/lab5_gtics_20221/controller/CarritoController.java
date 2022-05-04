@@ -32,6 +32,11 @@ public class CarritoController {
         List<Juegos> carrito = (List<Juegos>) session.getAttribute("carrito");
         User user = (User) session.getAttribute("usuario");
         List<JuegosxUsuario> listaComprar = new ArrayList<JuegosxUsuario>();
+        if(carrito.size()==0){
+            redirectAttributes.addFlashAttribute("msg", "No tiene ningún juego en el carrito");
+            return "redirect:/carrito/lista";
+        }
+
         for (Juegos i : carrito) {
             JuegosxUsuario juegosxUsuario = new JuegosxUsuario();
             juegosxUsuario.setIdjuego(i);
