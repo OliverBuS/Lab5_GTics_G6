@@ -21,13 +21,15 @@
                                 <span class="position-absolute top-100 end-0 translate-middle badge bg-danger fs-6"></span>
                                 <!--VALIDAR QUE LA OPCION COMPRA NO ESTE HABILITADA SIN INICIO DE SESION
                                     COLOCAR EL HREF CORRESPONDIENTE PARA COMPRAR EL JUEGO-->
-                                <a class="btn btn-primary" th:title="Comprar"><span class="bi bi-plus-circle" th:href=""></span> Comprar</a>
+                                <a class="btn btn-primary" th:title="Comprar"><span class="bi bi-plus-circle" th:href="@{/juegos/vista}"></span> Comprar</a>
                                 <div class="card-body">
                                     <h5 class="card-title" >
                                         <span th:text="${juego.nombre}"></span>
                                         <span class="badge bg-warning text-dark" th:text="${juego.genero.nombre}"></span>
                                     </h5>
-                                    <p class="card-text" th:text="${juego.descripcion}"><span class="badge bg-danger" th:text="${juego.precio}"></span></p>
+                                    <p class="card-text" >
+                                        <span th:text="${juego.descripcion}"></span>
+                                        <span class="badge bg-danger" th:text="${juego.precio}"></span></p>
                                 </div>
                             </div>
                         </div>
