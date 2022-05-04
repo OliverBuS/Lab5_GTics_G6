@@ -22,7 +22,41 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Controller
 public class UserController {
+
+
+    @Autowired
+    UserRepository usuarioRepository;
+
+    @GetMapping("/")
+    public String index() {
+        return "redirect:/product";
+    }
+
+    @GetMapping("/user/singIn")
+    public String login(){
+        return "user/signIn";
+    }
+
+
+    @GetMapping("/redirectByRole")
+    public String redirectByRole(Authentication auth,
+                                 HttpSession session){
+
+        String role = "";
+        for (GrantedAuthority authority : auth.getAuthorities()) {
+            role = authority.getAuthority();
+            break;
+        }
+        User usuario = usuarioRepository.findByCorreo(auth.getName());
+        session.setAttribute("usuario",usuario);
+
+       if(role.equals("User")){
+            return "redirect:/vista";
+        }
+            return "redirect:/juegos/lista";
+
+    }
 
 }
