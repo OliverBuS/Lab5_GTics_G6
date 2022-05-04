@@ -32,6 +32,11 @@ public class CarritoController {
         List<Juegos> carrito = (List<Juegos>) session.getAttribute("carrito");
         User user = (User) session.getAttribute("usuario");
         List<JuegosxUsuario> listaComprar = new ArrayList<JuegosxUsuario>();
+        if(carrito.size()==0){
+            redirectAttributes.addFlashAttribute("msg", "No tiene ningún juego en el carrito");
+            return "redirect:/carrito/lista";
+        }
+
         for (Juegos i : carrito) {
             JuegosxUsuario juegosxUsuario = new JuegosxUsuario();
             juegosxUsuario.setIdjuego(i);
@@ -70,7 +75,7 @@ public class CarritoController {
                 if (juego.getIdjuego() == optionalJuegos.get().getIdjuego()) {
                     juegoeliminado= carrito.get(index).getNombre();
                     carrito.remove(index);
-                    ncarrito--;
+                    ncarrito=ncarrito-1;
                     break;
                 }
                 index++;
@@ -98,7 +103,7 @@ public class CarritoController {
         List<Juegos> carrito = (List<Juegos>) session.getAttribute("carrito");
         int ncarrito = (int) session.getAttribute("ncarrito");
         carrito.add(optionalJuegos.get());
-        session.setAttribute("ncarrito", ncarrito++);
+        session.setAttribute("ncarrito", ncarrito+1);
         session.setAttribute("carrito", carrito);
         redirectAttributes.addFlashAttribute("msg", "se ha añadido el juego " +optionalJuegos.get().getNombre() + " al carrito");
         return "redirect:/carrito/lista";
