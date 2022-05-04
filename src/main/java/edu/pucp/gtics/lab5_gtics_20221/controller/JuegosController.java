@@ -40,13 +40,17 @@ public class JuegosController {
     @GetMapping(value = {"/juegos/lista"})
     public String listaJuegos (Model model, HttpSession session){
         //VALIDAR EL ROL DEL USUARIO LOGUEADO
-        if (session.getAttribute("autorizacion").equals("ADMIN")) {
+        User user = (User) session.getAttribute("usuario");
+
+        if (user.getAutorizacion().equals("ADMIN")) {
             //SI ES ADMIN, DEBE MANDAR MODEL CON METODO listaJuegosPorPrecio
             model.addAttribute("listaJuegos", juegosRepository.listaJuegosPorPrecio());
             return "juegos/lista";
         } else {
+
+
             //SI ES USER, DEBE MANDAR MODEL CON METODO obtenerJuegosPorUser
-            model.addAttribute("listaJuegos", juegosRepository.obtenerJuegosPorUser(1));
+            model.addAttribute("listaJuegos", juegosRepository.obtenerJuegosPorUser(user.getIdusuario()));
             return "juegos/comprado";
         }
     }
@@ -55,7 +59,12 @@ public class JuegosController {
     public String vistaJuegos (Model model, HttpSession session){
         //EL 0 DEL METODO listaJuegosVista CAMBIARLO POR ID DEL USUARIO EN SESION
         //MANDAR 0 SI NO SE HA LOGUEADO
-        model.addAttribute("listaJuegos", juegosRepository.listaJuegosVista((int) session.getAttribute("idusuario")));
+        User user = (User) session.getAttribute("usuario");
+        if( user==null){
+            model.addAttribute("listaJuegos", juegosRepository.listaJuegosVista(0));
+        } else {
+            model.addAttribute("listaJuegos", juegosRepository.listaJuegosVista(user.getIdusuario()));
+        }
         return "juegos/vista";
     }
 

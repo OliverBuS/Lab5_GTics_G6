@@ -14,7 +14,7 @@
                 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 card-app">
                 <div class="col mb-4" th:each="juego, i : ${listaJuegos}">
                     <div class="card" >
-                        <img th:src="${juego.image}" class="card-img-top" alt="Card image cap">
+                        <img th:src="${juego.imageURL}" class="card-img-top" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title" >
                                 <span th:text="${juego.nombre}"></span>

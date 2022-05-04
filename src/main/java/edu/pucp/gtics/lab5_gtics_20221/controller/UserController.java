@@ -56,8 +56,10 @@ public class UserController {
         if (role.equalsIgnoreCase("user")) {
             session.setAttribute("carrito", new ArrayList<Juegos>());
             session.setAttribute("ncarrito", 0);
+            return "redirect:/vista";
+        } else {
+            return "redirect:/juegos/lista";
         }
-        return "redirect:/vista";
 
     }
 

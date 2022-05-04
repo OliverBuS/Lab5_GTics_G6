@@ -102,7 +102,16 @@ public class CarritoController {
         if (optionalJuegos.isEmpty()) {
             return "redirect:/vista";
         }
-        List<Juegos> carrito = (List<Juegos>) session.getAttribute("carrito");
+        List<Juegos> carrito= (List<Juegos>) session.getAttribute("carrito");
+
+        int index=0;
+        for(Juegos i : carrito){
+            if(i.getIdjuego()==optionalJuegos.get().getIdjuego()){
+                redirectAttributes.addFlashAttribute("msg","Ya tiene el juego en su carrito");
+                return "redirect:/carrito/lista";
+            }
+        }
+
         int ncarrito = (int) session.getAttribute("ncarrito");
         carrito.add(optionalJuegos.get());
         session.setAttribute("ncarrito", ncarrito+1);
