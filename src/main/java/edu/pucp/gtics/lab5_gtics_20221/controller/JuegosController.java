@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,10 +38,9 @@ public class JuegosController {
     UserRepository userRepository;
 
     @GetMapping(value = {"/juegos/lista"})
-    public String listaJuegos (Model model){
+    public String listaJuegos (Model model, HttpSession session){
         //VALIDAR EL ROL DEL USUARIO LOGUEADO
-        boolean a = true;
-        if (a) {
+        if (session.getAttribute("autorizacion").equals("ADMIN")) {
             //SI ES ADMIN, DEBE MANDAR MODEL CON METODO listaJuegosPorPrecio
             model.addAttribute("listaJuegos", juegosRepository.listaJuegosPorPrecio());
             return "juegos/lista";
@@ -52,10 +52,10 @@ public class JuegosController {
     }
 
     @GetMapping(value = {"", "/", "/vista"})
-    public String vistaJuegos (Model model){
+    public String vistaJuegos (Model model, HttpSession session){
         //EL 0 DEL METODO listaJuegosVista CAMBIARLO POR ID DEL USUARIO EN SESION
         //MANDAR 0 SI NO SE HA LOGUEADO
-        model.addAttribute("listaJuegos", juegosRepository.listaJuegosVista(0));
+        model.addAttribute("listaJuegos", juegosRepository.listaJuegosVista((int) session.getAttribute("idusuario")));
         return "juegos/vista";
     }
 
