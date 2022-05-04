@@ -36,7 +36,7 @@ public class UserController {
         return "redirect:/product";
     }
 
-    @GetMapping("/singIn")
+    @GetMapping("/SingIn")
     public String login() {
         return "user/signIn";
     }

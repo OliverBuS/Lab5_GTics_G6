@@ -21,7 +21,7 @@
                                 <span class="position-absolute top-100 end-0 translate-middle badge bg-danger fs-6"></span>
                                 <!--VALIDAR QUE LA OPCION COMPRA NO ESTE HABILITADA SIN INICIO DE SESION
                                     COLOCAR EL HREF CORRESPONDIENTE PARA COMPRAR EL JUEGO-->
-                                <a class="btn btn-primary" th:title="Comprar"><span class="bi bi-plus-circle" th:href="@{/juegos/vista}"></span> Comprar</a>
+                                <a class="btn btn-primary" th:title="Comprar" th:href="@{|/carrito/anadir?id=${juego.idjuego}|}"><span class="bi bi-plus-circle" ></span> Comprar</a>
                                 <div class="card-body">
                                     <h5 class="card-title" >
                                         <span th:text="${juego.nombre}"></span>
