@@ -29,7 +29,8 @@
                                     </h5>
                                     <p class="card-text" >
                                         <span th:text="${juego.descripcion}"></span>
-                                        <span class="badge bg-danger" th:text="${juego.precio}"></span></p>
+                                        <span class="position-absolute translate-middle badge bg-danger" style="position: relative; bottom: -20px; right: -1px; z-index: 10;"><b th:text="'$ '+ ${juego.precio}"></b><span class="visually-hidden">unread messages</span></span>
+                                        <!--<span class="badge bg-danger" th:text="${juego.precio}"></span></p>-->
                                 </div>
                             </div>
                         </div>
