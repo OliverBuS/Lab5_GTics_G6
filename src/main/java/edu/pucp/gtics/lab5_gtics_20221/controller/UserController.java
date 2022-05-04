@@ -25,4 +25,42 @@ import java.util.List;
 
 public class UserController {
 
+
+    @Autowired
+    UserRepository usuarioRepository;
+
+    @GetMapping("/")
+    public String index() {
+        return "redirect:/product";
+    }
+
+    @GetMapping("/login")
+    public String login(){
+        return "user/signIn";
+    }
+
+
+    @GetMapping("/redirectByRole")
+    public String redirectByRole(Authentication auth,
+                                 HttpSession session){
+
+        String role = "";
+        for (GrantedAuthority authority : auth.getAuthorities()) {
+            role = authority.getAuthority();
+            break;
+        }
+
+        //auth -> username (p.e. oscar.diaz@gmail) / rol (p.e. admin)
+
+        User usuario = usuarioRepository.findByCorreo(auth.getName());
+        session.setAttribute("usuario",usuario);
+
+     /*   if(role.equals("Cliente")){
+            return "redirect:/";
+        }else{
+            return "redirect:/";
+        }*/
+        return "/";
+    }
+
 }
