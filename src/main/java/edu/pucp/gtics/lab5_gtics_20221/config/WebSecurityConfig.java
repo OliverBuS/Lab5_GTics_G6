@@ -18,10 +18,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception{
 
         http.authorizeRequests()
-                .antMatchers("/plataformas","/plataformas/**").hasAuthority("Admin")
-                .antMatchers("/distribuidoras","/distribuidoras/**").hasAuthority("Admin")
-                .antMatchers("/carrito", "/carrito/**").hasAuthority("User")
-                .antMatchers("/juegos", "/juegos/**").hasAnyAuthority("Admin", "User")
+                .antMatchers("/plataformas","/plataformas/**").hasAuthority("ADMIN")
+                .antMatchers("/distribuidoras","/distribuidoras/**").hasAuthority("ADMIN")
+                .antMatchers("/carrito", "/carrito/**").hasAuthority("USER")
+                .antMatchers("/juegos", "/juegos/**").hasAnyAuthority("ADMIN", "USER")
                 .anyRequest().permitAll();
 
         http.formLogin().loginPage("/user/SingIn").loginProcessingUrl("/processLogin").usernameParameter("correo")

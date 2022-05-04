@@ -36,15 +36,15 @@ public class UserController {
         return "redirect:/product";
     }
 
-    @GetMapping("/SingIn")
-    public String login(){
+    @GetMapping("/singIn")
+    public String login() {
         return "user/signIn";
     }
 
 
     @GetMapping("/redirectByRole")
     public String redirectByRole(Authentication auth,
-                                 HttpSession session){
+                                 HttpSession session) {
 
         String role = "";
         for (GrantedAuthority authority : auth.getAuthorities()) {
@@ -52,9 +52,13 @@ public class UserController {
             break;
         }
         User usuario = usuarioRepository.findByCorreo(auth.getName());
-        session.setAttribute("usuario",usuario);
-
-            return "redirect:/juegos/vista";
+        session.setAttribute("usuario", usuario);
+        if (role.equalsIgnoreCase("user")) {
+            session.setAttribute("carrito", new ArrayList<Juegos>());
+            session.setAttribute("ncarrito", 0);
+        }
+        System.out.println(role);
+        return "redirect:/vista";
 
     }
 
