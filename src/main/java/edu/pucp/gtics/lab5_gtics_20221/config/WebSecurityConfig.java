@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().permitAll();
 
         http.formLogin().loginPage("/user/SingIn").loginProcessingUrl("/processLogin").usernameParameter("correo")
-                .defaultSuccessUrl("/redirectByRole",true);
+                .defaultSuccessUrl("/user/redirectByRole",true);
         http.logout().logoutSuccessUrl("/");
 
 
