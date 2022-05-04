@@ -17,9 +17,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
 
+        http.authorizeRequests()
+                .antMatchers("/plataformas","/plataformas/**").hasAuthority("Admin")
+                .antMatchers("/distribuidoras","/distribuidoras/**").hasAuthority("Admin")
+                .antMatchers("/carrito", "/carrito/**").hasAuthority("User")
+                .antMatchers("/juegos", "/juegos/**").hasAnyAuthority("Admin", "User")
+                .anyRequest().permitAll();
 
-
-        http.formLogin().loginPage("/login").loginProcessingUrl("/processLogin").usernameParameter("correo")
+        http.formLogin().loginPage("/user/SingIn").loginProcessingUrl("/processLogin").usernameParameter("correo")
                 .defaultSuccessUrl("/redirectByRole",true);
         http.logout().logoutSuccessUrl("/");
 

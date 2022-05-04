@@ -22,7 +22,7 @@ import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.List;
 
-
+@Controller
 public class UserController {
 
 
@@ -34,7 +34,7 @@ public class UserController {
         return "redirect:/product";
     }
 
-    @GetMapping("/login")
+    @GetMapping("/user/singIn")
     public String login(){
         return "user/signIn";
     }
@@ -49,18 +49,14 @@ public class UserController {
             role = authority.getAuthority();
             break;
         }
-
-        //auth -> username (p.e. oscar.diaz@gmail) / rol (p.e. admin)
-
         User usuario = usuarioRepository.findByCorreo(auth.getName());
         session.setAttribute("usuario",usuario);
 
-     /*   if(role.equals("Cliente")){
-            return "redirect:/";
-        }else{
-            return "redirect:/";
-        }*/
-        return "/";
+       if(role.equals("User")){
+            return "redirect:/vista";
+        }
+            return "redirect:/juegos/lista";
+
     }
 
 }
