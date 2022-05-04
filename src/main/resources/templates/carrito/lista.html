@@ -23,12 +23,24 @@
                     <tr>
                         <th>#</th>
                         <th></th>
-                        <th style="width: 8%"></th>
+                        <th style="width: 8%">Nombre</th>
+                        <th>Descripción</th>
+                        <th>Plataforma</th>
+                        <th>Distribuidora</th>
+                        <th>Precio (S/)</th>
+                        <th></th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr >
-                        <td><a class="btn btn-danger" th:title="Borrar" th:href=""><span class="bi bi-trash"></span></a></td>
+                    <tr th:each="juego,i : ${session.carrito}">
+                        <th th:text="${i.index+1}"></th>
+                        <th><img th:src="${juego.image}" style="height: 130px; width: 80px"></th>
+                        <th th:text="${juego.nombre}"></th>
+                        <th th:text="${juego.descripcion}"></th>
+                        <th th:text="${juego.plataforma.nombre}"></th>
+                        <th th:text="${juego.distribuidora.nombre}"></th>
+                        <th th:text="${juego.precio}"></th>
+                        <td><a class="btn btn-danger" th:title="Borrar" th:href="@{|/carrito/borrar?id=${juego.idjuego}|}"><span class="bi bi-trash"></span></a></td>
                     </tr>
                     </tbody>
                 </table>
